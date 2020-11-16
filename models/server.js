@@ -9,7 +9,7 @@ const Sockets = require('./sockets');
 class Server {
   constructor() {
     // Aplicación de express
-    this.app = express();
+    this.app = express(); 
     this.port = process.env.PORT;
 
     // Http Server
