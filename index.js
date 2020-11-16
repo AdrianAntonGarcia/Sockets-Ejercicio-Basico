@@ -21,6 +21,14 @@ io.on('connection', (socket) => {
   socket.on('mensaje-cliente', (data) => {
     console.log(data);
   });
+
+  socket.on('mensaje-to-server', (data) => {
+    console.log(data);
+    /*solo emitimos al cliente que mando el mensaje, estamos ejecutando sobre socket*/
+    //socket.emit('mensaje-from-server', data);
+    // con io enviamos a todas las personas
+    io.emit('mensaje-from-server', data );
+  });
 });
 
 server.listen(8080, () => {

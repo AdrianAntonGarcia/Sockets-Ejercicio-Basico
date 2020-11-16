@@ -26,10 +26,7 @@
     <div class="row">
         <div class="col">
             <ul id="misMensajes" class="mt-2">
-                <li>Hola</li>
-                <li>Mundo</li>
-                <li>suu</li>
-                <li>Hola</li>
+
             </ul>
         </div>
     </div>
@@ -43,11 +40,25 @@
         // Referencias a los elementos del DOM
         const formulario = document.querySelector('#miFormulario');
         const mensajes = document.querySelector('#misMensajes');
+        const txtMensaje = document.querySelector('#txtMensaje');
+
 
 
         // El on es para escuchar, escuchamos el namespace por defecto, el /
         socket.on('mensaje-bienvenida', (data) => {
             console.log(data);
+        });
+
+        formulario.addEventListener('submit', (ev) => {
+            ev.preventDefault();
+            const nuevoMensaje = txtMensaje.value;
+            // console.log(nuevoMensaje);
+            socket.emit('mensaje-to-server', { texto: nuevoMensaje });
+           
+        });
+
+        socket.on('mensaje-from-server', (data) => {
+            mensajes.innerHTML += `<li>${data.texto}</li>`;
         });
     </script>
 </body>
